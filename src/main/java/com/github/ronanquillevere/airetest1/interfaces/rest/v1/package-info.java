@@ -1,0 +1,8 @@
+@ParametersAreNonnullByDefault
+@MethodsAreNonnullByDefault
+@FieldsAreNonnullByDefault
+package com.github.ronanquillevere.airetest1.interfaces.rest.v1;
+
+import javax.annotation.ParametersAreNonnullByDefault;
+import javax.annotation.FieldsAreNonnullByDefault;
+import javax.annotation.MethodsAreNonnullByDefault;

@@ -1,0 +1,11 @@
+<included>
+  
+  <!-- uncomment to enable debug on mycom classes -->
+  
+  <!-- 
+  <logger name="com.mycom" level="DEBUG">
+    <nx-topology-restender-ref ref="FILE" />
+  </logger>
+  -->
+  
+</included>

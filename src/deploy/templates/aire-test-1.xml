@@ -1,0 +1,8 @@
+<!-- WEB APP CONTEXT TEMPLATE FILE -->
+<!DOCTYPE project>
+<Context path="${deploy.url}"
+	docBase="${deploy.path.lib}/${project.build.finalName}.war" antiResourceLocking="false" >
+      <Environment name="conf/aire-test-1.properties.filepath" value="${deploy.path.etc}/${artifactId}.properties" type="java.lang.String" override="false"/>
+      <Environment name="conf/aire-test-1.log.conf.filepath" value="${deploy.path.etc}/${artifactId}.xml" type="java.lang.String" override="false"/>
+      <Environment name="conf/aire-test-1.log.file.dir" value="${logDir}" type="java.lang.String" override="false"/>
+</Context>

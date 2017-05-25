@@ -1,0 +1,52 @@
+<configuration debug="true" scan="true" scanPeriod="30 seconds">
+	<!-- additional configuration file is provided in the web application aire-test-1 context -->
+	<insertFromJNDI as="logConf"
+		env-entry-name="java:comp/env/conf/aire-test-1.log.conf.filepath" />
+	<insertFromJNDI as="logDir"
+		env-entry-name="java:comp/env/conf/aire-test-1.log.file.dir" />
+
+	<include file="${logConf}" optional="true" />
+	<appender class="ch.qos.logback.core.ConsoleAppender" name="STDOUT">
+		<encoder>
+			<pattern>%d %-4relative [%thread] %-5level %logger{35} - %msg %n
+			</pattern>
+		</encoder>
+	</appender>
+
+	<appender class="ch.qos.logback.core.rolling.RollingFileAppender"
+		name="FILE">
+		<file>${logDir}/aire-test-1.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>${logDir}/aire-test-1.%d{yyyyMMdd}.log
+			</fileNamePattern>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%d %-4relative [%thread] %-5level %logger{35} - %msg%n
+			</pattern>
+		</encoder>
+	</appender>
+
+	<appender class="ch.qos.logback.core.rolling.RollingFileAppender"
+		name="PERF">
+		<file>${logDir}/aire-test-1.perf.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>${logDir}/aire-test-1.perf.%d{yyyyMMdd}.log
+			</fileNamePattern>
+		</rollingPolicy>
+		<encoder>
+			<pattern>"%d";"%thread";%msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<!-- Need to be in trace to have some logs -->
+	<logger name="performance" additivity="false" level="INFO">
+		<appender-ref ref="PERF" />
+	</logger>
+
+	<root level="INFO">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="FILE" />
+	</root>
+</configuration>

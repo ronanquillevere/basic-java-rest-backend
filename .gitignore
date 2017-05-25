@@ -1,0 +1,7 @@
+/.settings
+.project
+.classpath
+/target
+/logDir_IS_UNDEFINED
+pom.xml.bak
+.checkstyle

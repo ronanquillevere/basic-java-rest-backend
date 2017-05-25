@@ -1,0 +1,11 @@
+<configuration debug="true" scan="true" scanPeriod="30 seconds">
+  <!-- additional configuration file is provided in the web application context  -->
+  <appender class="ch.qos.logback.core.ConsoleAppender" name="STDOUT">
+    <encoder>
+      <pattern>%d %-4relative [%thread] %-5level %logger{35} - %msg %n</pattern>
+    </encoder>
+  </appender>
+  <root level="INFO">
+    <appender-ref ref="STDOUT"/>
+  </root>
+</configuration>

@@ -1,0 +1,155 @@
+<jqa:jqassistant-rules xmlns:jqa="http://www.buschmais.com/jqassistant/core/analysis/rules/schema/v1.2">
+
+  <concept id="ddd:Interfaces">
+    <description>Interfaces layer of DDD architecture</description>
+    <cypher><![CDATA[
+            MATCH
+              (t:Type)
+            WHERE
+              t.fqn =~ ".*interfaces.*"
+            SET
+              t:DDD_Interfaces
+            RETURN t
+        ]]></cypher>
+  </concept>
+
+  <concept id="ddd:Application">
+    <description>Application layer of DDD architecture</description>
+    <cypher><![CDATA[
+            MATCH 
+              (t:Type) 
+            WHERE 
+              t.fqn =~ ".*application.*" 
+            SET 
+              t:DDD_Application 
+            RETURN 
+              t
+        ]]></cypher>
+  </concept>
+
+  <concept id="ddd:Domain">
+    <description>Domain layer of DDD architecture</description>
+    <cypher><![CDATA[
+            MATCH 
+              (t:Type) 
+            WHERE 
+              t.fqn =~ ".*domain.*" 
+            SET 
+              t:DDD_Domain 
+            RETURN t
+        ]]></cypher>
+  </concept>
+
+  <concept id="ddd:Infrastructure">
+    <description>Infrastructure layer of DDD architecture</description>
+    <cypher><![CDATA[
+            MATCH 
+              (t:Type) 
+            WHERE 
+              t.fqn =~ ".*infrastructure.*" 
+            SET 
+              t:DDD_Infrastructure 
+            RETURN 
+              t
+        ]]></cypher>
+  </concept>
+
+  <constraint id="ddd:TestInterfacesDomain">
+    <requiresConcept refId="ddd:Interfaces" />
+    <requiresConcept refId="ddd:Domain" />
+    <description>No class from Interfaces can have a dependency on Domain
+    </description>
+    <cypher><![CDATA[
+            MATCH
+                (t:DDD_Interfaces)-[DEPENDS_ON]->(f:DDD_Domain)
+            RETURN
+                t AS DDD_InvalidDependency
+        ]]></cypher>
+  </constraint>
+
+  <constraint id="ddd:TestInterfacesInfrastructure">
+    <requiresConcept refId="ddd:Interfaces" />
+    <requiresConcept refId="ddd:Infrastructure" />
+    <description>No class from Interfaces can have a dependency on Infrastructure
+    </description>
+    <cypher><![CDATA[
+            MATCH
+                (t:DDD_Interfaces)-[DEPENDS_ON]->(f:DDD_Infrastructure)
+            RETURN
+                t AS DDD_InvalidDependency
+        ]]></cypher>
+  </constraint>
+
+  <constraint id="ddd:TestApplicationInterfaces">
+    <requiresConcept refId="ddd:Application" />
+    <requiresConcept refId="ddd:Interfaces" />
+    <description>No class from Application can have a dependency on Interfaces
+    </description>
+    <cypher><![CDATA[
+            MATCH
+                (t:DDD_Application)-[DEPENDS_ON]->(f:DDD_Interfaces)
+            RETURN
+                t AS DDD_InvalidDependency
+        ]]></cypher>
+  </constraint>
+
+
+  <constraint id="ddd:TestDomainApplication">
+    <requiresConcept refId="ddd:Domain" />
+    <requiresConcept refId="ddd:Application" />
+    <description>No class from Domain can have a dependency on Application</description>
+    <cypher><![CDATA[
+            MATCH
+                (t:DDD_Domain)-[DEPENDS_ON]->(f:DDD_Application)
+            RETURN
+                t AS DDD_InvalidDependency
+        ]]></cypher>
+  </constraint>
+
+  <constraint id="ddd:TestDomainInterfaces">
+    <requiresConcept refId="ddd:Domain" />
+    <requiresConcept refId="ddd:Interfaces" />
+    <description>No class from Domain can have a dependency on Interfaces</description>
+    <cypher><![CDATA[
+            MATCH
+                (t:DDD_Domain)-[DEPENDS_ON]->(f:DDD_Interfaces)
+            RETURN
+                t AS DDD_InvalidDependency
+        ]]></cypher>
+  </constraint>
+
+  <constraint id="ddd:TestDomainInfrastructure">
+    <requiresConcept refId="ddd:Domain" />
+    <requiresConcept refId="ddd:Infrastructure" />
+    <description>No class from Domain can have a dependency on Infrastructure</description>
+    <cypher><![CDATA[
+            MATCH
+                (t:DDD_Domain)-[DEPENDS_ON]->(f:DDD_Infrastructure)
+            RETURN
+                t AS DDD_InvalidDependency
+        ]]></cypher>
+  </constraint>
+
+  <constraint id="ddd:TestInfrastructureInterfaces">
+    <requiresConcept refId="ddd:Infrastructure" />
+    <requiresConcept refId="ddd:Interfaces" />
+    <description>No class from Infrastructure can have a dependency on Interfaces</description>
+    <cypher><![CDATA[
+            MATCH
+                (t:DDD_Infrastructure)-[DEPENDS_ON]->(f:DDD_Interfaces)
+            RETURN
+                t AS DDD_InvalidDependency
+        ]]></cypher>
+  </constraint>
+
+  <group id="ddd_layers" severity="blocker">
+    <includeConstraint refId="ddd:TestInterfacesDomain" severity="minor" />
+    <includeConstraint refId="ddd:TestInterfacesInfrastructure" />
+    <includeConstraint refId="ddd:TestApplicationInterfaces" />
+    <includeConstraint refId="ddd:TestDomainApplication" />
+    <includeConstraint refId="ddd:TestDomainInterfaces" />
+    <includeConstraint refId="ddd:TestDomainInfrastructure" />
+    <includeConstraint refId="ddd:TestInfrastructureInterfaces" />
+  </group>
+
+</jqa:jqassistant-rules>
