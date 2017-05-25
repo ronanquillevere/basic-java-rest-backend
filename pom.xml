@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.github.ronanquillevere</groupId>
-	<artifactId>aire-test</artifactId>
+	<artifactId>java-rest-backend</artifactId>
 	<version>1.0</version>
 	<packaging>war</packaging>
 	<properties>
@@ -24,6 +24,8 @@
 		<mockito.version>2.7.22</mockito.version>
 		<jukito.version>1.5</jukito.version>
 		<maven-war-plugin.version>3.0.0</maven-war-plugin.version>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
 	</properties>
 	<dependencies>
 
@@ -124,12 +126,9 @@
 			<scope>test</scope>
 		</dependency>
 
-		<!-- <dependency>
-			<groupId>com.google.code.findbugs</groupId>
-			<artifactId>annotations</artifactId>
-			<version>3.0.1</version>
-		</dependency> -->
-		
+		<!-- <dependency> <groupId>com.google.code.findbugs</groupId> <artifactId>annotations</artifactId> 
+			<version>3.0.1</version> </dependency> -->
+
 		<dependency>
 			<groupId>org.jukito</groupId>
 			<artifactId>jukito</artifactId>
@@ -166,8 +165,7 @@
 							<!-- <cargo.servlet.port>8200</cargo.servlet.port> -->
 							<cargo.jvmargs>-Xmx2048m -Xms512m</cargo.jvmargs>
 							<!-- Uncomment below to debug -->
-							<!-- <cargo.start.jvmargs>-Xdebug
-								-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8000</cargo.start.jvmargs> -->
+							<!-- <cargo.start.jvmargs>-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8000</cargo.start.jvmargs> -->
 						</properties>
 					</configuration>
 				</configuration>

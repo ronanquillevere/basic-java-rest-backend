@@ -1,0 +1,8 @@
+@ParametersAreNonnullByDefault
+@MethodsAreNonnullByDefault
+@FieldsAreNonnullByDefault
+package com.github.rq.testapp.infrastructure;
+
+import javax.annotation.ParametersAreNonnullByDefault;
+import javax.annotation.FieldsAreNonnullByDefault;
+import javax.annotation.MethodsAreNonnullByDefault;

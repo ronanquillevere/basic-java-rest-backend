@@ -1,8 +1,0 @@
-@ParametersAreNonnullByDefault
-@MethodsAreNonnullByDefault
-@FieldsAreNonnullByDefault
-package com.github.ronanquillevere.airetest1.injection;
-
-import javax.annotation.FieldsAreNonnullByDefault;
-import javax.annotation.MethodsAreNonnullByDefault;
-import javax.annotation.ParametersAreNonnullByDefault;
